@@ -2,6 +2,10 @@
 
 A small, self-contained example of proving a cryptographic scheme correct in [Lean 4](https://lean-lang.org/) with [Mathlib](https://github.com/leanprover-community/mathlib4).
 
+Lean is a programming language and a proof assistant: you write a mathematical statement, write a proof, and Lean checks every step down to the axioms. Mathlib is its library of formalized mathematics (polynomials, fields, probability, …), which this project builds on.
+
+To install everything and run the proofs on your own computer, follow [INSTALL.md](INSTALL.md).
+
 The scheme is from A. Shamir, [*How to Share a Secret*](https://dl.acm.org/doi/10.1145/359168.359176), Communications of the ACM 22(11), 1979. The whole development is about 150 lines.
 
 ## The scheme
@@ -16,6 +20,21 @@ Shamir's two claims:
 
 - **Correctness:** any `k + 1` parties can recover `s`.
 - **Perfect secrecy:** any `k` parties learn nothing about `s`.
+
+## The idea in one picture
+
+Take threshold `2`, so `k = 1` and the polynomial is a line, `p(X) = s + a₀·X`, crossing the vertical axis at the secret `s`.
+
+- **Two shares are enough.** Two points determine a line, so two parties can draw it and read off where it meets the axis.
+- **One share reveals nothing.** Through a single point `(x, p(x))` with `x ≠ 0` passes exactly one line for *each* possible value at `0`. A party holding one share cannot tell which line the dealer drew, and when `a₀` is random every secret is equally likely.
+
+The general case is the same with polynomials of degree `k`: `k + 1` points determine such a polynomial, but `k` points leave the value at `0` completely free.
+
+## What "proved" means here
+
+A test checks a scheme on some inputs. A proof covers **all** of them: every field, every threshold, every secret, every choice of random coefficients, every set of points. Lean accepts a theorem only if every step of its proof checks. If a step were wrong, or a hypothesis were missing (for example, that the points are distinct), the file would not compile.
+
+What remains to trust is the statement itself, which is why the statements below are explained in words. You never need to read a proof to trust its result, only its statement.
 
 ## What is proved
 
@@ -70,7 +89,7 @@ If you are new to Lean, start with `Shamir/Example.lean`, then read `Shamir/Basi
 
 ## How to run
 
-You need [`elan`](https://github.com/leanprover/elan), Lean's version manager. Then:
+[INSTALL.md](INSTALL.md) is a step-by-step guide for Windows, macOS and Linux. In short, with [`elan`](https://github.com/leanprover/elan) (Lean's version manager) installed:
 
 ```bash
 lake exe cache get   # download prebuilt Mathlib (a few minutes; avoids compiling it)
