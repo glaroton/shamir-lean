@@ -104,3 +104,7 @@ To explore interactively, open the folder in VS Code with the Lean 4 extension.
 ## Versions
 
 Lean `4.31.0` and Mathlib `v4.31.0` (see `lean-toolchain` and `lakefile.toml`).
+
+## License
+
+[Apache License 2.0](LICENSE), the same license as Lean and Mathlib.
