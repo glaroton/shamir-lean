@@ -26,7 +26,7 @@ Shamir's two claims:
 Take threshold `2`, so `k = 1` and the polynomial is a line, `p(X) = s + a₀·X`, crossing the vertical axis at the secret `s`.
 
 - **Two shares are enough.** Two points determine a line, so two parties can draw it and read off where it meets the axis.
-- **One share reveals nothing.** Through a single point `(x, p(x))` with `x ≠ 0` passes exactly one line for *each* possible value at `0`. A party holding one share cannot tell which line the dealer drew, and when `a₀` is random every secret is equally likely.
+- **One share reveals nothing.** Through a single point `(x, p(x))` with `x ≠ 0` passes exactly one line for *each* possible value at `0`. A party holding one share cannot tell which line the dealer drew: when `a₀` is random, every value of the share is equally likely, whatever the secret is.
 
 The general case is the same with polynomials of degree `k`: `k + 1` points determine such a polynomial, but `k` points leave the value at `0` completely free.
 
